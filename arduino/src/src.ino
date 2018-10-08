@@ -9,8 +9,8 @@
 int led = 13;
 
 // Control Keys
-char steerLeft = 'a';
-char steerRight = 's'; 
+char lightOn = 'a';
+char lightOff = 's'; 
 
 // initialisation of program
 void setup() { 
@@ -21,12 +21,12 @@ void setup() {
 void lightControl() {
   if (Serial.available()) {
     char ch = Serial.read();
-    if (ch == steerLeft) {
-      Serial.write("steer left");
+    if (ch == lightOn) {
+      Serial.write("light on");
       digitalWrite(led, HIGH);
     }
-    if (ch == steerRight) {
-      Serial.write("steer right"); 
+    if (ch == lightOff) {
+      Serial.write("light off"); 
       digitalWrite(led, LOW);
     }
   }
