@@ -1,23 +1,18 @@
-const http = require('http'); // const https = require('https');
-
-// TODO's 
-// - use https with AWS end point.
-
-// Simple use of Socket IO - Web Server Only.
-const io = require('socket.io')({ serveClient: false });
-
-// Handles data to serial event
-const serialHandler = require('serialHandler');
+// Node's https module
+const https = require('https');
 
 // Extract variables from appConstants
-const { databaseEndPoint } = require('appConstants');
+const { databaseEndPoint } = require('./appConstants');
+
+// Sends led data to serial
+const ledHandler = require('./ledHandler');
 
 // Listens to AWS Endpoint
 const server = require('http').createServer();
 
-const getData = () => {
-  setTimeout(function () {
-  http.get(databaseEndPoint, (resp) => {
+// Get state from database
+const getCurrentStateData = () => {
+  https.get(databaseEndPoint, (resp) => {
       let data = '';
       resp.on('data', (chunk) => {
         data += chunk;
@@ -28,9 +23,10 @@ const getData = () => {
     }).on("error", (err) => {
       console.log("Error: " + err.message);
     });
-  });
 };
 
+// Sends data to Arduino via ledHandler()
+// Initialises the next timeout for polling the server for changes.
 const appUpdate = (data) => {
   /*
     data: { 
@@ -39,13 +35,25 @@ const appUpdate = (data) => {
       }
     }
   */
-  // Trigger in a cycle - polling database for changes.
-  let pollDelay = 3000;
-  setTimeout(getData, pollDelay);
+  let pollDelay = 2000;
+  setTimeout(getCurrentStateData, pollDelay);
   if (!data) return;
-  serialHandler(data);
+  ledHandler(data.state.light);
 }
 
-appUpdate();
+server.listen(3000, function () { 
+  console.log('listening on 3000'); 
+  appUpdate();
+});
 
-server.listen(3000, function () { console.log('listening on 3000'); });
+// ------------ //
+// For Dev use: //
+// ------------ //
+ 
+// A test method to ensure for the Arduino
+// To toggle the data sent from 0 to 1
+// const appUpdateMock = () => {
+//   if(out === 0) out = 1;
+//   else if(out === 1) out = 0;
+//   appUpdate(out);
+// }

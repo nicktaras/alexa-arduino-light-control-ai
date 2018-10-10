@@ -1,3 +1,4 @@
-DS_STORE
+.DS_STORE
 node/app/node_modules
 node/app/appConstants.js
+node/app/yarn-error.log

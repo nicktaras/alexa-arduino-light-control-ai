@@ -1,10 +1,8 @@
+var appConstants = require('./appConstants');
 var SerialPort = require('serialport');
-var port = new SerialPort('/dev/tty-usbserial1'); 
+var port = new SerialPort(appConstants.arduinoSerialPort); 
 
-// TODO's 
-// - find serial of board
-
-const serialHandlder = (msg) => {
+const ledHandler = (msg) => {
 
   port.write(msg, function(err) {
 
@@ -21,4 +19,4 @@ const serialHandlder = (msg) => {
   });
 }
 
-module.exports = serialHandlder;
+module.exports = ledHandler;
