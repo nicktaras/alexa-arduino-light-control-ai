@@ -10,6 +10,7 @@ IAM Permissions / Roles
 Arduino UNO
 USB serial communication for initial app 
 (WIFI / BLUETOOTH module - awaiting parts)
+NODE JS as middleware from AWS to Serial
 
 ## Project Parts
 
