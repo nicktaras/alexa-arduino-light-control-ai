@@ -9,33 +9,31 @@ API Gateway
 IAM Permissions / Roles
 Arduino UNO
 USB serial communication for initial app 
-(WIFI / BLUETOOTH module - awaiting parts)
 NODE JS as middleware from AWS to Serial
 
 ## Project Parts
 
 A: Alexa + Lamda (receive intents and request to update database)
-TBC - using technologies such as web sockets / API gateway (expose requested data to middleware)
 
 e.g.
 
 Emit from Alexa's Lambda function:
 
 {
-   evt: 'LIGHTS_ON'
+   light: 'on'
 }
 
 B: Middleware node js server to send information to serial.
 
 e.g.
 
-Send serial data to Arduino: 'LIGHTS_ON'
+Send serial data to Arduino: '1' or '0'
 
 C: Handle serial data inside arduino program.
 
 e.g.
 
-if (Serial.read() == 'Turn the Light On') {
+if (Serial.read() == '1') {
   digitalWrite(led, HIGH);
 }
 
@@ -58,3 +56,6 @@ This project will demonstrate how an arduino can be connected to Alexa and the r
 
 Screen can be used to talk to the serial port via the terminal - screen /dev/ttyS0 19200
 https://www.npmjs.com/package/serialport - popular serial port node library
+
+![alt text](https://github.com/nicktaras/alexa-arduino-light-control-ai/blob/master/img/Screen%20Shot%202018-10-18%20at%2020.30.40.png?raw=true)
+
