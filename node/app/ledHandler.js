@@ -2,20 +2,26 @@ var appConstants = require('./appConstants');
 var SerialPort = require('serialport');
 var port = new SerialPort(appConstants.arduinoSerialPort); 
 
-const ledHandler = (msg) => {
+// Convert input to readable output
+const ledStateTransformed = (state) => {
+  return state === 'on' ? '1' : '0';
+}
 
-  port.write(msg, function(err) {
-
+// ledHandler sends the updated state 
+// to the arduino via the serial port.
+const ledHandler = (state) => {
+  /*
+    {
+      "light": String ("on" / "off")
+    }
+  */
+  port.write(ledStateTransformed(state), function(err) {
     if (err) {
       return console.log('Error on write: ', err.message);
     }
-
     console.log('Success: message written');
-
   }, 'error', function(err) {
-
     console.log('Error: ', err.message);
-
   });
 }
 

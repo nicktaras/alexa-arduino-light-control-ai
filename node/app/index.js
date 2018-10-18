@@ -30,15 +30,13 @@ const getCurrentStateData = () => {
 const appUpdate = (data) => {
   /*
     data: { 
-      state: {
-        light: boolean
-      }
+      state: (boolean)
     }
   */
   let pollDelay = 2000;
   setTimeout(getCurrentStateData, pollDelay);
   if (!data) return;
-  ledHandler(data.state.light);
+  ledHandler(data.state);
 }
 
 server.listen(3000, function () { 
@@ -53,7 +51,7 @@ server.listen(3000, function () {
 // A test method to ensure for the Arduino
 // To toggle the data sent from 0 to 1
 // const appUpdateMock = () => {
-//   if(out === 0) out = 1;
-//   else if(out === 1) out = 0;
+//   if(out === 'OFF') out = 'ON';
+//   else if(out === 'ON') out = 'OFF';
 //   appUpdate(out);
 // }
