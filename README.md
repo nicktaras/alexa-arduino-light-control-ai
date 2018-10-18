@@ -56,8 +56,7 @@ This project will demonstrate how an arduino can be connected to Alexa and the r
 
 ## Application Flow of hardware and software components
 
-This diagram is to illustrate the technology parts needed to replicate this project, and provide and overview of how they
-are connected.
+This diagram illustrates the technology parts needed to replicate this project, also providing and overview of the applications data flow.
 
 - Alexa device (Echo Dot, or another Alexa enabled hardware device)
 - Alexa Led Test skill (this is the skill created to understand the intents and slot in this demo)
