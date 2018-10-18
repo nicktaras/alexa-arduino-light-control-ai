@@ -60,7 +60,7 @@ Diagram to illustrate the technology parts needed to replicate this project, als
 
 - Alexa device (Echo Dot, or another Alexa enabled hardware device)
 - Alexa Led Test skill (this is the skill created to understand the intents and slot in this demo)
-- Lambda instance A is responsible for connecting to Alexa, interpreting (converted inputs) and writting them to the db.
+- Lambda instance A is responsible for connecting to Alexa, interpreting (json inputs) and writting them to the db.
 - A Dynamo DB instance is used to store the data from the input
 - Lambda instance B is responsible for reading the database (trimming the instance id from its data output)
 - API Gateways serves a get request to read from our Lambda function's output
