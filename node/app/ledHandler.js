@@ -4,7 +4,7 @@ var port = new SerialPort(appConstants.arduinoSerialPort);
 
 // Convert input to readable output
 const ledStateTransformed = (state) => {
-  return state === 'on' ? '1' : '0';
+  return (state === 'on') ? '1' : '0';
 }
 
 // ledHandler sends the updated state 
@@ -19,7 +19,7 @@ const ledHandler = (state) => {
     if (err) {
       return console.log('Error on write: ', err.message);
     }
-    console.log('Success: message written');
+    console.log('Success: message written', state);
   }, 'error', function(err) {
     console.log('Error: ', err.message);
   });

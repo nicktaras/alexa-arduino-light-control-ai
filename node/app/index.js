@@ -29,14 +29,14 @@ const getCurrentStateData = () => {
 // Initialises the next timeout for polling the server for changes.
 const appUpdate = (data) => {
   /*
-    data: { 
-      state: (boolean)
+    data: {
+      light: 'String'
     }
   */
   let pollDelay = 2000;
   setTimeout(getCurrentStateData, pollDelay);
   if (!data) return;
-  ledHandler(data.state);
+  ledHandler(data.light);
 }
 
 server.listen(3000, function () { 
