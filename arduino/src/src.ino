@@ -1,6 +1,5 @@
 /*
   Alexa LED Control
-
   A simple program which recieves serial data to switch
   a light on or off.
   
@@ -9,8 +8,8 @@
 int led = 13;
 
 // Control Keys
-char lightOn = 'a';
-char lightOff = 's'; 
+char lightOn = '1';
+char lightOff = '0';
 
 // initialisation of program
 void setup() { 
@@ -35,4 +34,3 @@ void lightControl() {
 void loop() {
   lightControl();
 }
-

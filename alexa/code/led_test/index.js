@@ -2,18 +2,18 @@
 // led_test
 // This is a proof of concept application / boiler plate to build
 // an IOT application.
-// For more infromation please visit: https://github.com/nicktaras/alexa-arduino-light-control-ai
+// For more information please visit: https://github.com/nicktaras/alexa-arduino-light-control-ai
 //
 
 'use strict';
 
 const Alexa = require('alexa-sdk');
 const AWS = require('aws-sdk');
-const APP_ID = undefined;
+const APP_ID = "ADD_ALEXA_ID_HERE";
 
 const handlers = {
   'LaunchRequest': function () {
-    this.emit(':ask', "Welcome");
+    this.emit(':ask', "Welcome to the LED Test Skill.");
   },
   'AMAZON.FallbackIntent': function () {
     this.emit(':ask', "Something went wrong, try again.");
@@ -32,36 +32,40 @@ const handlers = {
   },
   'light_intent': function () {
 
+    // doc client AWS API
     var docClient = new AWS.DynamoDB.DocumentClient();
+    
+    // Read from JSON user request data
     let slotValue = this.event.request.intent.slots.switch.value || 'off';
-    
-    // state is the primary key
-    // 0 is the entry position.
-    
-    // switch is the slot
-    // slot value is the value to assign
-    
+
+    // UpdateExpression (method field operator :tempVariable)
+    // ExpressionAttributeValues (assign value to db field)
     var params = {
-        TableName: "LedDb",
+        TableName: "Device_DB",
         Key:{
-            "state": 0
+            "instance": 0
         },
-        UpdateExpression: "set switch = :switchState",
-        ExpressionAttributeValues: {
-            ":switchState" : slotValue
-        }
+        UpdateExpression: "set light = :lightValue",
+        ExpressionAttributeValues:{
+            ":lightValue" : slotValue
+        },
+        ReturnValues:"UPDATED_NEW"
     };
 
-    docClient.update(params, (() => {
-      this.emit(':ask', 'Switching the light ' + slotValue);  
+    // Post data to database
+    docClient.update(params, ((err, data) => {
+      if (err) {
+        this.emit(':ask', 'Sorry the request failed. Please try again');  
+      } else {
+        this.emit(':ask', 'Switching the light ' + slotValue);  
+      }
     }));
-      
   }
 }; 
 
 exports.handler = function (event, context, callback) {
   const alexa = Alexa.handler(event, context, callback);
-  alexa.APP_ID = APP_ID;
+  alexa.appId = APP_ID;
   alexa.registerHandlers(handlers);
   alexa.execute();
 };
