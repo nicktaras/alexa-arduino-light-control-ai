@@ -4,6 +4,9 @@ var port = new SerialPort(appConstants.arduinoSerialPort);
 
 // Convert input to readable output
 const ledStateTransformed = (state) => {
+  /*
+    handles input types: 'on' | 'off' || other.
+  */
   return (state === 'on') ? '1' : '0';
 }
 
