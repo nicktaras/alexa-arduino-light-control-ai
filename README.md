@@ -63,8 +63,8 @@ Diagram to illustrate the technology parts needed to replicate this project, als
 - Lambda instance A is responsible for connecting to Alexa, interpreting (json inputs) and writting them to the db.
 - A Dynamo DB instance is used to store the data from the input
 - Lambda instance B is responsible for reading the database (trimming the instance id from its data output)
-- API Gateways serves a get request to read from our Lambda function's output
-- Node Application is used as a headless API to receive, transform and send data to the arduino via the serial
+- The API Gateway provides a get method to read from Lambda instance B's output
+- A Node Application is used as a headless API to receive, transform and send data to the arduino via the serial
 - Arduino is programmed to recieve data from the serial port and control the Led as per user request.
 
 ![alt text](https://github.com/nicktaras/alexa-arduino-light-control-ai/blob/master/img/Screen%20Shot%202018-10-18%20at%2020.30.40.png?raw=true)
