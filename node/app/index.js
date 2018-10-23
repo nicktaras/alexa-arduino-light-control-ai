@@ -4,7 +4,7 @@ const https = require('https');
 // Extract variables from appConstants
 const { databaseEndPoint } = require('./appConstants');
 
-// Sends led data to serial
+// Sends led data to serial (USB or Bluetooth)
 const ledHandler = require('./ledHandler');
 
 // Listens to AWS Endpoint
@@ -36,7 +36,10 @@ const appUpdate = (data) => {
   let pollDelay = 2000;
   setTimeout(getCurrentStateData, pollDelay);
   if (!data) return;
-  ledHandler(data.light);
+
+  // if connectecting to Arduino via serial port
+  ledHandler(data.light)
+
 }
 
 server.listen(3000, function () { 

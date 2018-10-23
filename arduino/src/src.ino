@@ -14,6 +14,7 @@ char lightOff = '0';
 // initialisation of program
 void setup() { 
   pinMode(led, OUTPUT); 
+  Serial.println("Setup is Ready");
   Serial.begin(9600);
 }
 

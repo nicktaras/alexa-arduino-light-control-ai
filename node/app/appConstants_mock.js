@@ -6,9 +6,12 @@
 // databaseEndPoint: where alexa's output to a db can be found.
 // arduinoSerialPort: the usb port the arduino is plugged into.
 
+// To obtain a list of serial connections, run: ls /dev/tty.*
+
 const appConstants = {
   databaseEndPoint: 'add end point here',
-  arduinoSerialPort: '/dev/cu.usbmodem0000'
+  arduinoSerialPort: '/dev/cu.usbmodem0000',
+  arduinoBluetooth: '/dev/tty.HC-06-DevB'
 }
 
 module.exports = appConstants;
