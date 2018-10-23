@@ -1,8 +1,7 @@
 # alexa-arduino-light-control-ai
 A small proof of concept project to connect the Arduino to Alexa audio commands.
 
-See this link for outcome of this project, aimed at providing some thing that you
-can build your own project upon.
+See this link for outcome of this project, which is aimed at helping you kickstart your own project.
 https://www.youtube.com/watch?v=M7Y7hVBxCtM&t=2s
 
 ## Project Technology
